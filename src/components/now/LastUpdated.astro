@@ -1,0 +1,14 @@
+---
+import { getLangFromUrl } from "@i18n/utils";
+import { getFormatDateString } from "@/lib/date/format";
+import { getEntry } from "astro:content";
+
+const { date } = Astro.props as { date: Date };
+
+const lang = getLangFromUrl(Astro.url);
+const formatDateString = getFormatDateString(lang);
+const i18n = (await getEntry("i18n", lang))!.data;
+
+---
+
+{i18n["lastUpdated"] + formatDateString(date) + "."}

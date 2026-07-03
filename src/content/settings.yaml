@@ -1,0 +1,10 @@
+site:
+  fullName: "Example Person"
+  contactEmail: "hello@example.com"
+  analyticsUrl:
+  profileImage: "profile.webp"
+  social:
+    github: "https://github.com/marcfranquesa/marcfm.com"
+    googleScholar:
+    linkedin:
+  showNowPage: true

@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PaperList from "@/components/papers/PaperList.astro";
+import NewsList from "@/components/news/NewsList.astro";
+import { Image } from "astro:assets";
+import { getLangFromUrl, getStaticPaths } from "@i18n/utils";
+import { getEntry, render } from "astro:content";
+import { getContentImage } from "@/lib/content/images";
+import { getSiteSettings } from "@/lib/content/settings";
+
+export { getStaticPaths };
+
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+const bio = await getEntry("bio", lang);
+const { Content } = await render(bio!);
+const profileImage = getContentImage((await getSiteSettings()).profileImage);
+---
+
+<Layout pageTitle="" tabTitle="">
+  <div class="responsive-container">
+    <div>
+      <Content />
+    </div>
+    <Image
+      src={profileImage}
+      alt={i18n["home.imgAlt"]}
+      class="profile-image"
+      width={512}
+      height={512}
+      style="width: 225px; height: 225px; border-radius: 50%; object-fit: cover; flex-shrink: 0;"
+      loading="eager"
+    />
+  </div>
+  <NewsList />
+  <PaperList />
+</Layout>
+
+<style>
+  .responsive-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-direction: row;
+  }
+
+  .profile-image {
+    align-self: flex-start;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .responsive-container {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 0;
+    }
+
+    .profile-image {
+      align-self: center;
+      margin-top: 0;
+    }
+  }
+</style>

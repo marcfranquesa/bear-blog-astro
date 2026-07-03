@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getEntry, render } from "astro:content";
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import LastUpdated from "@/components/now/LastUpdated.astro";
+import { getLatestNowPost, getNowStaticPaths } from "@/lib/content/now";
+
+export { getNowStaticPaths as getStaticPaths };
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const rssPath = translatePath("/now/feed");
+const i18n = (await getEntry("i18n", lang))!.data;
+const mostRecentPost = await getLatestNowPost(lang);
+
+let Content;
+let lastUpdateDate;
+if (mostRecentPost) {
+    lastUpdateDate = mostRecentPost.data.date;
+    const rendered = await render(mostRecentPost);
+    Content = rendered.Content;
+}
+---
+
+<Layout
+    pageTitle={i18n["now.title"]}
+    icon="rss"
+    path={rssPath}
+    tabTitle={i18n["now.tabTitle"]}
+>
+    {
+        Content ? (
+            <>
+                <em><LastUpdated date={lastUpdateDate} /></em>
+                <Content />
+            </>
+        ) : (
+            <p>{i18n["now.fallback"]}</p>
+        )
+    }
+</Layout>

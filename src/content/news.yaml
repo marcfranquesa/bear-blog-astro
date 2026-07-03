@@ -1,0 +1,5 @@
+example-launch:
+  date: "2030-01"
+  description:
+    en: "Example news item showing the shape of `news.yaml`."
+    ca: "Noticia d'exemple que mostra la forma de `news.yaml`."

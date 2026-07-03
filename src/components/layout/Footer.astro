@@ -1,0 +1,21 @@
+---
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import { getEntry } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const i18n = (await getEntry("i18n", lang))!.data;
+
+const currentPath = Astro.url.pathname;
+const isWebsitePage = currentPath.includes("/website");
+---
+
+<footer>
+  {
+    isWebsitePage ? null : (
+      <small>
+        <a href={translatePath("/website")}>{i18n["footer.website"]}</a>
+      </small>
+    )
+  }
+</footer>

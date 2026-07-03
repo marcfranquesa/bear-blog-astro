@@ -1,0 +1,23 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getLangFromUrl, getStaticPaths } from "@i18n/utils";
+import { obfuscateEmail } from "@/lib/email";
+import { getEntry } from "astro:content";
+import { getSiteSettings } from "@/lib/content/settings";
+
+export { getStaticPaths };
+
+const email = (await getSiteSettings()).contactEmail;
+const obfuscatedEmail = obfuscateEmail(email);
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+---
+
+<Layout pageTitle={i18n["contact.title"]} tabTitle={i18n["contact.tabTitle"]}>
+    <p>{i18n["contact.string"]}</p>
+    <p>
+        <em class={obfuscatedEmail.className} set:html={obfuscatedEmail.html} />
+    </p>
+</Layout>
+
+<style set:html={obfuscatedEmail.css}></style>

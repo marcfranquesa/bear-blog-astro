@@ -1,0 +1,15 @@
+---
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import { getSiteSettings } from "@/lib/content/settings";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const settings = await getSiteSettings();
+---
+
+<header>
+  <a class="title" href={translatePath("/")}>
+    <h1>{settings.fullName}</h1>
+  </a>
+  <slot />
+</header>

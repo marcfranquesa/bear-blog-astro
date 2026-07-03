@@ -1,0 +1,39 @@
+site.description: "Contingut d'exemple per a un web personal."
+
+nav.home: "inici"
+nav.now: "ara"
+nav.contact: "contacte"
+nav.langSwitch: "Switch to English"
+
+footer.website: "sobre aquest web"
+
+home.imgAlt: "Imatge de perfil d'exemple"
+
+news.title: "Noticies"
+
+404.imgAlt: "Imatge 404 d'exemple"
+404.text: "Aquesta pagina d'exemple no existeix."
+
+now.title: "Que faig ara"
+now.tabTitle: "Ara"
+now.fallback: "Encara no hi ha actualitzacions d'exemple."
+now.feed.title: "Canal d'exemple"
+now.feed.description: "Actualitzacions personals d'exemple."
+now.feed.itemTitle: "Actualitzacio d'exemple del"
+
+contact.title: "Contacte"
+contact.tabTitle: "Contacte"
+contact.string: "Substitueix aquest text pel teu contacte."
+
+website.title: "Web"
+website.tabTitle: "Web"
+website.tech:
+  - "Construit amb <a href='https://astro.build/'>Astro</a>."
+  - "Les col.leccions de contingut poden viure en un checkout privat."
+  - "Aquest arbre public utilitza contingut fictici de <code>src/content</code>."
+
+papers.title: "Publicacions"
+papers.availableUponRequest: "disponible a peticio"
+
+otherLang: "en"
+lastUpdated: "Actualitzat el "

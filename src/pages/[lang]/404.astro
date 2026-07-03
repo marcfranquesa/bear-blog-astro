@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import { getLangFromUrl, getStaticPaths } from "@i18n/utils";
+import cagaTio from "@/assets/caga-tio.jpg";
+import { getEntry } from "astro:content";
+
+export { getStaticPaths };
+
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+---
+
+<Layout pageTitle="" tabTitle="">
+  <div style="text-align: center; display: flex; flex-flow: column;">
+    <Image
+      src={cagaTio}
+      alt={i18n["404.imgAlt"]}
+      style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto;"
+    />
+    <br />
+    <p>{i18n["404.text"]}</p>
+  </div>
+</Layout>

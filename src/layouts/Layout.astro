@@ -1,0 +1,72 @@
+---
+import "@/styles/global.css";
+
+import Head from "@/components/layout/Head.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Nav from "@/components/layout/Nav.astro";
+import { getLangFromUrl } from "@i18n/utils";
+import Icon from "@/components/ui/Icon.astro";
+import { getEntry } from "astro:content";
+import type { ComponentProps } from "astro/types";
+
+interface Props {
+  pageTitle: string;
+  tabTitle: string;
+  icon?: ComponentProps<typeof Icon>["which"];
+  path?: string;
+}
+
+const { pageTitle, tabTitle, icon, path } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <Head
+      title={pageTitle}
+      tabTitle={tabTitle}
+      description={i18n["site.description"]}
+    />
+  </head>
+  <body>
+    <div class="container">
+      <Header>
+        <Nav />
+      </Header>
+      <main>
+        {
+          pageTitle && (
+            <h3>
+              {pageTitle}
+              {icon && (
+                <a href={path ?? Astro.url} style="margin-left: 4px;">
+                  <Icon which={icon} />
+                </a>
+              )}
+            </h3>
+          )
+        }
+        <slot />
+      </main>
+    </div>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+  }
+
+  .container {
+    min-height: 100vh;
+  }
+</style>

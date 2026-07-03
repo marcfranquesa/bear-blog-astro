@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import { getEntry, type CollectionEntry } from "astro:content";
+
+const lang = getLangFromUrl(Astro.url);
+
+interface Props {
+  paper: CollectionEntry<"papers">;
+}
+
+const { paper } = Astro.props;
+const data = paper.data;
+const i18n = (await getEntry("i18n", lang))!.data;
+const translatePath = useTranslatedPath(lang);
+const links = Object.entries(data.links ?? {})
+  .filter((entry): entry is [string, string] => Boolean(entry[1]))
+  .map(([label, href]) => ({ label, href }));
+
+if (paper.body?.trim()) {
+  links.push({ label: "bib", href: `/bib/${paper.id}` });
+}
+---
+
+<div>
+  <strong>{data.title}</strong>
+  <br />
+  <span>{data.author}.</span>
+  {
+    data.venue && <> <em>{data.venue}</em>.</>
+  }
+  <br />
+  {
+    links.length > 0 ? (
+      <span>
+        {links.map(({ label, href }, index) => (
+          <>
+            <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>{
+              index < links.length - 1 ? ", " : "."
+            }
+          </>
+        ))}
+      </span>
+    ) : (
+      <span>
+        <a href={translatePath(`/contact`)}>{i18n["papers.availableUponRequest"]}</a>.</span>
+    )
+  }
+</div>

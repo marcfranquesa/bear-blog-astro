@@ -1,0 +1,31 @@
+---
+import GithubIcon from "../../assets/icons/github.svg";
+import GoogleScholarIcon from "../../assets/icons/google-scholar.svg";
+import LinkedinIcon from "../../assets/icons/linkedin.svg";
+import RssIcon from "../../assets/icons/rss.svg";
+
+const icons = {
+  github: GithubIcon,
+  "google-scholar": GoogleScholarIcon,
+  linkedin: LinkedinIcon,
+  rss: RssIcon,
+} as const;
+
+interface Props {
+  which: keyof typeof icons;
+}
+
+const { which } = Astro.props;
+const SubIcon = icons[which];
+---
+
+<SubIcon class="icon" />
+
+<style>
+  .icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    fill: currentColor;
+  }
+</style>

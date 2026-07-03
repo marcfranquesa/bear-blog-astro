@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g stroke="#1e1e2e" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Leaves -->
+    <path d="M 50 40 C 30 20, 10 30, 20 45 C 25 40, 40 40, 50 40 Z" fill="#a6e3a1"/>
+    <path d="M 50 40 C 70 20, 90 30, 80 45 C 75 40, 60 40, 50 40 Z" fill="#a6e3a1"/>
+    <path d="M 50 40 L 40 10 L 50 5 L 60 10 Z" fill="#94e2d5"/>
+    <!-- Berry Body -->
+    <path d="M 35 40 L 65 40 A 13 13 0 0 1 80 55 A 13 13 0 0 1 75 75 A 15 15 0 0 1 50 90 A 15 15 0 0 1 25 75 A 13 13 0 0 1 20 55 A 13 13 0 0 1 35 40 Z" fill="#f38ba8"/>
+  </g>
+</svg>

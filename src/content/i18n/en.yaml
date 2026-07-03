@@ -1,0 +1,39 @@
+site.description: "Example personal website content."
+
+nav.home: "home"
+nav.now: "now"
+nav.contact: "contact"
+nav.langSwitch: "Canvia al catala"
+
+footer.website: "about this website"
+
+home.imgAlt: "Example profile placeholder"
+
+news.title: "News"
+
+404.imgAlt: "Example 404 image"
+404.text: "This example page does not exist."
+
+now.title: "What I'm up to"
+now.tabTitle: "Now"
+now.fallback: "No example updates yet."
+now.feed.title: "Example now feed"
+now.feed.description: "Example personal updates."
+now.feed.itemTitle: "Example update from"
+
+contact.title: "Contact"
+contact.tabTitle: "Contact"
+contact.string: "Replace this with your contact copy."
+
+website.title: "Website"
+website.tabTitle: "Website"
+website.tech:
+  - "Built with <a href='https://astro.build/'>Astro</a>."
+  - "Content collections can live in a private checkout."
+  - "This public tree uses example content from <code>src/content</code>."
+
+papers.title: "Publications"
+papers.availableUponRequest: "available upon request"
+
+otherLang: "ca"
+lastUpdated: "Last updated "

@@ -1,0 +1,38 @@
+---
+import { defaultLang } from "@i18n/langs";
+import { isNowPageEnabled } from "@/lib/content/settings";
+
+export async function getStaticPaths() {
+    const showNowPage = await isNowPageEnabled();
+    const localizedPages = import.meta.glob("./[lang]/**/*.{astro,ts}");
+    const getDefaultLangRewriteSlug = (pagePath: string) => {
+        const route = pagePath
+            .replace(/^\.\/\[lang\]\//, "")
+            .replace(/\.(astro|ts)$/, "")
+            .replace(/\/index$/, "");
+
+        if (route.includes("[")) return null;
+        if (!showNowPage && (route === "now" || route === "now/feed")) {
+            return null;
+        }
+        if (route === "" || route === "index") return undefined;
+
+        return route;
+    };
+
+    return Object.keys(localizedPages)
+        .map(getDefaultLangRewriteSlug)
+        .filter((page) => page !== null)
+        .map((page) => ({
+            params: { defaultLangRewriteSlug: page },
+        }));
+}
+
+const { defaultLangRewriteSlug } = Astro.params;
+
+const path = defaultLangRewriteSlug
+    ? `${defaultLang}/${defaultLangRewriteSlug}`
+    : defaultLang;
+
+return Astro.rewrite(path);
+---

@@ -1,0 +1,92 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import { getLangFromUrl } from "@i18n/utils";
+import { getFormatMonthYearString, parseUTCDateString } from "@/lib/date/format";
+import MarkdownIt from "markdown-it";
+import sanitizeHtml from "sanitize-html";
+
+interface Props {
+    limit?: number;
+    title?: string;
+}
+
+const { limit = 3, title } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+const markdown = new MarkdownIt({ html: false });
+const formatMonthYear = getFormatMonthYearString(lang);
+
+const renderDescription = (description: string) =>
+    sanitizeHtml(markdown.renderInline(description), {
+        allowedTags: ["a", "code", "em", "strong"],
+        allowedAttributes: {
+            a: ["href", "title", "target", "rel"],
+        },
+        allowedSchemes: ["http", "https", "mailto"],
+        transformTags: {
+            a: (tagName, attribs) => ({
+                tagName,
+                attribs: {
+                    ...attribs,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                },
+            }),
+        },
+    });
+
+const news = (await getCollection("news"))
+    .sort((a, b) => b.data.date.localeCompare(a.data.date))
+    .slice(0, limit);
+---
+
+{
+    news.length > 0 && (
+        <section aria-labelledby="news-title">
+            <h3 id="news-title">{title ?? i18n["news.title"]}</h3>
+            <ul class="news-list">
+                {news.map((item) => {
+                    const date = item.data.date;
+                    const dateLabel = formatMonthYear(parseUTCDateString(date));
+                    const description = renderDescription(
+                        item.data.description[lang],
+                    );
+
+                    return (
+                        <li>
+                            <span class="post-date">
+                                <time datetime={date}>{dateLabel}</time>
+                            </span>
+                            <span
+                                class="post-description"
+                                set:html={description}
+                            />
+                        </li>
+                    );
+                })}
+            </ul>
+        </section>
+    )
+}
+
+<style>
+    .news-list {
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
+        column-gap: 2ch;
+        list-style-type: none;
+        padding: unset;
+    }
+
+    .news-list li {
+        display: contents;
+    }
+
+    .post-date {
+        white-space: nowrap;
+    }
+
+    .post-description {
+        min-width: 0;
+    }
+</style>

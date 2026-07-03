@@ -1,0 +1,72 @@
+---
+import {
+  getLangFromUrl,
+  getUrlWithoutLang,
+  useTranslatedPath,
+} from "@i18n/utils";
+import Icon from "@/components/ui/Icon.astro";
+import { getEntry } from "astro:content";
+import { getSiteSettings } from "@/lib/content/settings";
+
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+const settings = await getSiteSettings();
+
+const urlWithoutLang = getUrlWithoutLang(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const otherLangTranslatePath = useTranslatedPath(i18n["otherLang"]);
+---
+
+<nav>
+  <p>
+    <span class="left">
+      <a href={translatePath("/")}>{i18n["nav.home"]}</a>
+      {settings.showNowPage && <a href={translatePath("/now")}>{i18n["nav.now"]}</a>}
+      <a href={translatePath("/contact")}
+        >{i18n["nav.contact"]}</a
+      >
+      {settings.social.github && (
+        <a class="icon-link" href={settings.social.github} aria-label="GitHub">
+          <Icon which="github" />
+        </a>
+      )}
+      {settings.social.googleScholar && (
+        <a
+          class="icon-link"
+          href={settings.social.googleScholar}
+          aria-label="Google Scholar profile"
+        >
+          <Icon which="google-scholar" />
+        </a>
+      )}
+      {settings.social.linkedin && (
+        <a class="icon-link" href={settings.social.linkedin} aria-label="LinkedIn">
+          <Icon which="linkedin" />
+        </a>
+      )}
+    </span>
+    <span class="right">
+      <a href={otherLangTranslatePath(urlWithoutLang)}>
+        {i18n["nav.langSwitch"]}</a
+      >
+    </span>
+  </p>
+</nav>
+
+<style>
+  p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  a {
+    margin-right: 8px;
+  }
+
+  .icon-link:hover {
+    text-decoration: none;
+  }
+</style>

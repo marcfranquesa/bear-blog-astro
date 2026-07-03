@@ -1,0 +1,21 @@
+---
+import { getLangFromUrl } from "@i18n/utils";
+import { getEntry, getCollection } from "astro:content";
+import PaperCard from "./PaperCard.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const i18n = (await getEntry("i18n", lang))!.data;
+const papers = (await getCollection("papers", ({ data }) => data.show)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<h3>{i18n["papers.title"]}</h3>
+
+{
+  papers.map((paper) => (
+    <div style="margin-bottom: 1rem;">
+      <PaperCard paper={paper} />
+    </div>
+  ))
+}
