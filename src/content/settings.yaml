@@ -7,4 +7,4 @@ site:
     github: "https://github.com/marcfranquesa/marcfm.com"
     googleScholar:
     linkedin:
-  showNowPage: true
+  nowEntry: "2030-01-01"

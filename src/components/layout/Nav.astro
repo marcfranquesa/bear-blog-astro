@@ -21,7 +21,7 @@ const otherLangTranslatePath = useTranslatedPath(i18n["otherLang"]);
   <p>
     <span class="left">
       <a href={translatePath("/")}>{i18n["nav.home"]}</a>
-      {settings.showNowPage && <a href={translatePath("/now")}>{i18n["nav.now"]}</a>}
+      {settings.nowEntry && <a href={translatePath("/now")}>{i18n["nav.now"]}</a>}
       <a href={translatePath("/contact")}
         >{i18n["nav.contact"]}</a
       >

@@ -1,7 +1,7 @@
 import type { ImageMetadata } from "astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/content/**/*.{jpg,jpeg,png,webp,svg}",
+  "/src/content/*.{jpg,jpeg,png,webp,svg}",
   { eager: true },
 );
 
