@@ -5,5 +5,5 @@ export async function getSiteSettings() {
 }
 
 export async function isNowPageEnabled() {
-  return (await getSiteSettings()).showNowPage;
+  return Boolean((await getSiteSettings()).nowEntry);
 }
