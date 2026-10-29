@@ -5,10 +5,10 @@ venue: "Example Conference"
 date: 2030-01-01
 show: true
 links:
-  arxiv: "https://github.com/marcfranquesa/marcfm.com"
-  conference: "https://github.com/marcfranquesa/marcfm.com"
-  proceedings: "https://github.com/marcfranquesa/marcfm.com"
-  code: "https://github.com/marcfranquesa/marcfm.com"
+  arxiv: "https://github.com/marcfranquesa/bear-blog-astro"
+  conference: "https://github.com/marcfranquesa/bear-blog-astro"
+  proceedings: "https://github.com/marcfranquesa/bear-blog-astro"
+  code: "https://github.com/marcfranquesa/bear-blog-astro"
 ---
 
 @inproceedings{example2030paper,

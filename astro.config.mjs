@@ -4,11 +4,12 @@ import mdx from "@astrojs/mdx";
 
 import { defineConfig } from "astro/config";
 
-const site = process.env.SITE_URL || "https://example.marcfm.com";
+const site = process.env.SITE_URL || "https://example.com";
 
 // https://astro.build/config
 export default defineConfig({
   site,
+  base: process.env.BASE_PATH || "/",
   prefetch: {
     prefetchAll: true,
     defaultStrategy: "load",

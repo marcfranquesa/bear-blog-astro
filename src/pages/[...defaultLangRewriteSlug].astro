@@ -1,5 +1,6 @@
 ---
 import { defaultLang } from "@i18n/langs";
+import { withBase } from "@i18n/utils";
 import { isNowPageEnabled } from "@/lib/content/settings";
 
 export async function getStaticPaths() {
@@ -34,5 +35,5 @@ const path = defaultLangRewriteSlug
     ? `${defaultLang}/${defaultLangRewriteSlug}`
     : defaultLang;
 
-return Astro.rewrite(path);
+return Astro.rewrite(withBase(`/${path}`));
 ---
