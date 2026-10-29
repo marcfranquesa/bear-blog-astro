@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslatedPath } from "@i18n/utils";
+import { getLangFromUrl, useTranslatedPath, withBase } from "@i18n/utils";
 import { getEntry, type CollectionEntry } from "astro:content";
 
 const lang = getLangFromUrl(Astro.url);
@@ -17,7 +17,7 @@ const links = Object.entries(data.links ?? {})
   .map(([label, href]) => ({ label, href }));
 
 if (paper.body?.trim()) {
-  links.push({ label: "bib", href: `/bib/${paper.id}` });
+  links.push({ label: "bib", href: withBase(`/bib/${paper.id}`) });
 }
 ---
 

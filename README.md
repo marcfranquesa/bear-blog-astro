@@ -5,7 +5,7 @@ A minimal, multilingual Astro website template inspired by Bear Blog.
 Includes profile, publications, news, contact, and optional now pages, with
 Markdown content collections and English/Catalan translations.
 
-Demo: https://example.marcfm.com.
+Demo: https://marcfranquesa.github.io/bear-blog-astro/.
 
 ## Development
 
@@ -27,5 +27,10 @@ Content can also live in a separate repository: set `CONTENT_REPO` when running
 
 ## Deployment
 
-The included `netlify.toml` builds the site and publishes `dist/`. Set `SITE_URL`
-to your deployment's canonical URL.
+The example deploys to GitHub Pages through `.github/workflows/pages.yml` on
+pushes to `main`. The workflow builds only the public example content and sets
+`SITE_URL` and `BASE_PATH` from the repository's Pages configuration.
+
+For your own deployment, set `SITE_URL` to the origin and `BASE_PATH` to the
+deployment subpath, if any. The included `netlify.toml` is also available for
+deployments on Netlify and publishes `dist/`.
