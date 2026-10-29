@@ -4,7 +4,7 @@ site:
   analyticsUrl:
   profileImage: "profile.webp"
   social:
-    github: "https://github.com/marcfranquesa/marcfm.com"
+    github: "https://github.com/marcfranquesa/bear-blog-astro"
     googleScholar:
     linkedin:
   nowEntry: "2030-01-01"
